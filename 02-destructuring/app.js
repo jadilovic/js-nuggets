@@ -1,3 +1,69 @@
+// Spread Operator...
+// Allows and iterable to spread/expand individually inside reciever
+// Split into single items and COPY them
+
+const udemy = 'udemy';
+
+const letters1 = udemy.split('')
+const letters2 = [...udemy];
+console.log(letters1, letters2);
+
+const boys = ['john', 'peter', 'bob'];
+const girls = ['susan', 'anna'];
+
+const bestFriend = 'arnold';
+
+const all = [...boys, ...girls, bestFriend];
+console.log(all);
+const newAll = all;
+const newAllCopy = [...all];
+newAll[0] = "aki";
+newAllCopy.push("aki");
+console.log(all);
+console.log(newAll);
+console.log(newAllCopy);
+
+const boy = {name: "aki", age: 99};
+const boy2 = boy;
+const boy3 = {...boy, name: "cuni", city: "detroit"};
+boy.lastName = "smith";
+console.log(boy2);
+console.log(boy3);
+
+// Rest Operator...
+// gathers/collects items
+// destructuring, functions
+// placement important, careful with the same name
+// rest when declare function, spread when invoke the function
+
+// arrays
+const voce = ['apple', 'orange', 'lemon', 'banana', 'pear'];
+
+const [apple, my, ...restFruits] = voce;
+console.log(restFruits);
+const specificFruit = restFruits.find((item) => item === 'banana');
+console.log(specificFruit);
+
+// objects
+const person = { name: 'john', lastName: 'smith', job: 'developer' };
+const {job, ...rest} = person;
+console.log(job, rest);
+
+// functions
+
+const getAverage = (name, ...resti) => {
+  console.log("FUNCTION");
+  console.log(name);
+  console.log(resti);
+  const reduced = resti.reduce((acc, curr) => {
+    acc += curr;
+    return parseFloat((acc / resti.length).toFixed(2));
+  }, 0)
+  return reduced;
+}
+const testArr = [44, 22, 11, 33, 55]
+console.log(getAverage(person.name, 45, 55, 66, 77, 88));
+console.log(getAverage(person.name, ...testArr));
 
 // objects destructuring
 
@@ -8,21 +74,29 @@ const bob = {
 	siblings: {
 		sister: 'jane',
 	},
-  ssi: {
-    number: {
-      street: "hhhh"
-    }
-  }
+	ssi: {
+		number: {
+			street: 'hhhh',
+		},
+	},
 };
 
-const getObject = ({last, city, siblings: {sister}}) => {
-  // const {last, city} = bob;
-  console.log(last, city, sister);
+const getObject = ({ last, city, siblings: { sister } }) => {
+	// const {last, city} = bob;
+	console.log(last, city, sister);
 };
 
 getObject(bob);
 
-const {last: prezime, city, siblings, siblings: {sister: favoriteSister}, ssi: {number: {street: mine}}} = bob;
+const {
+	last: prezime,
+	city,
+	siblings,
+	siblings: { sister: favoriteSister },
+	ssi: {
+		number: { street: mine },
+	},
+} = bob;
 
 console.log(prezime, city, siblings, favoriteSister, mine);
 
